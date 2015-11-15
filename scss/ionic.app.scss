@@ -1,0 +1,67 @@
+// Custom SCSS
+
+// Variables
+$mainColor: #831715;
+$secondColor: #FFFFE0;
+$spacerPadding: 5px;
+$shadingActive: #fff;
+
+// Header
+$bar-stable-text: $secondColor !important;
+$bar-stable-bg: $mainColor !important;
+
+// Sub-header
+$bar-subheader-height: 45px;
+
+.bar-subheader .icon {
+	color: $mainColor !important;
+}
+
+// Position arrows height
+.bar-subheader {
+	line-height: 37px !important;
+}
+
+// Buttons
+$button-default-text: $secondColor !important;
+$button-default-bg: #984746 !important;
+$button-default-active-bg: $mainColor !important;
+
+// Button Bars
+$button-bar-button-padding: 4px !important;
+$button-font-size:  15px !important;
+
+// Popover
+$popover-width: 150px;
+$popover-height: 120px;
+
+$popover-border-radius:  4px !important;
+	
+// Text
+h1, h2, h3, h4 {
+	color: $mainColor !important; 
+}
+
+$font-size-base:	15px !default;
+
+// Link
+a { 
+	color: $mainColor !important;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+// Other
+div.spacer {
+	width: 100%;
+	padding-top: $spacerPadding;
+	padding-bottom: $spacerPadding;
+}
+
+div.divider {
+	width: 100%;
+	border-bottom: thin solid $mainColor;
+}
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";

@@ -1,0 +1,12 @@
+{
+  "name": "Mieghek Fil-Mixja",
+  "app_id": "",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}
