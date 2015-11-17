@@ -9,11 +9,17 @@
   <script src="lib/ionic/js/ionic.bundle.js"></script>
 
   <!-- Include compiled CSS from SASS and fonts -->
+  <!-- IMPORTANT TO INCLUDE THE CLOSING </SCRIPT> TAG, OTHERWISE, HC.MARKED IS NOT FOUND IN APP.JS -->
+
   <link href="css/ionic.app.css" rel="stylesheet">
   <script src="lib/angular-resource/angular-resource.js"/>
+
+  <script src="lib/angular-sanitize/angular-sanitize.js"></script>
+  <script src="lib/showdown/src/showdown.js"></script>
+  <script src="lib/angular-markdown-directive/markdown.js"></script>
+
   <!-- Include Cordova -->
   <script src="cordova.js"></script>
-
 
   <!-- Application javascript -->
   <script src="js/app.js"></script>
@@ -21,6 +27,7 @@
   <script src="js/directives.js"></script>
   <script src="js/routes.js"></script>
   <script src="js/services.js"></script>
+
 
 </head>
 <body ng-app="app" animation="slide-left-right-ios7">

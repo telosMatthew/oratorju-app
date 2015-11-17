@@ -21,10 +21,30 @@
 		<div class="divider"></div>
 		<div class="spacer"></div>
 		<div class="spacer"></div>
+
+        <div btf-markdown="reading.r_content">
+        </div>
+        <!--
         <div>{{reading.r_content}}
             <p>Il-kelma li giet f'dehra lil Isaija bin Amos, dwar Guda u Gerusalemm.</p>
             <p>Ghad jigri fl-ahhar jiem li l-gholja tad-dar tal-Mulej toghla 'l fuq mill-qcacet tal-muntanji, u tintrefa 'l fuq mill-gholjiet , lejha ghad jigru l-gnus kollha.</p>
             <p>Kotra ta' popli ghad jigu u jghidu</p>
         </div>
+        -->
+
+    <ion-slide-box on-slide-changed="slideHasChanged($index)">
+      <ion-slide>
+        <div class="box blue"><h1>BLUE</h1></div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box yellow"><h1>YELLOW</h1></div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box pink"><h1>PINK</h1></div>
+      </ion-slide>
+    </ion-slide-box>
     </ion-content>
+
+
+
 </ion-view>

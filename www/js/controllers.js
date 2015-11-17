@@ -39,7 +39,7 @@ angular.module('app.controllers', ['ionic','app.services'])
             r_friendlyDate: $scope.readings[i].r_friendlyDate,
             r_content: $scope.readings[i].r_content
           }
-
+        //console.log($scope.readings[i].r_date);
         window.localStorage.setItem([$scope.readings[i].r_date], JSON.stringify(reading));
       }
      });
@@ -47,12 +47,12 @@ angular.module('app.controllers', ['ionic','app.services'])
     //$scope.orderProp = 'date';
   }])
 
-.controller('KelmaCtrl', function($scope) {
-    var currentReading = '05/11/2015'
+.controller('KelmaCtrl',  function($scope) {
+    var currentReading = '16/11/2015'
 
-    $scope.reading = JSON.parse(window.localStorage[currentReading] || '{}');
-
-    console.log($scope.reading);
+    $scope.reading = (JSON.parse(window.localStorage[currentReading] || '{}'));
+    //console.log($scope.markdown);
+   // console.log($scope.reading);
 })
 
 .controller('AhsebCtrl', function($scope) {

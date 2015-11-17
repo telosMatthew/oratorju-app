@@ -1,4 +1,4 @@
-angular.module('app', ['ionic',  'app.controllers', 'app.routes', 'app.directives'])
+angular.module('app',['ionic','app.controllers', 'app.routes', 'app.directives','btford.markdown'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
