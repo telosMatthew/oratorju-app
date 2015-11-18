@@ -1,4 +1,4 @@
-angular.module('app',['ionic','app.controllers', 'app.routes', 'app.directives','btford.markdown'])
+angular.module('app',['ionic','app.controllers', 'app.routes', 'app.directives','hc.marked'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -13,3 +13,7 @@ angular.module('app',['ionic','app.controllers', 'app.routes', 'app.directives',
     }
   });
 })
+  //reset the controller each time it is accessed
+.config(function($ionicConfigProvider){
+    $ionicConfigProvider.views.maxCache(0);
+  });

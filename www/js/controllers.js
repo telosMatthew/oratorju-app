@@ -37,22 +37,63 @@ angular.module('app.controllers', ['ionic','app.services'])
           {
             r_date: $scope.readings[i].r_date,
             r_friendlyDate: $scope.readings[i].r_friendlyDate,
-            r_content: $scope.readings[i].r_content
+            r_qari1: $scope.readings[i].r_qari1,
+            r_salm: $scope.readings[i].r_salm,
+            r_qari2: $scope.readings[i].r_qari2,
+            r_vangelu: $scope.readings[i].r_vangelu
           }
-        //console.log($scope.readings[i].r_date);
-        window.localStorage.setItem([$scope.readings[i].r_date], JSON.stringify(reading));
+
+        window.localStorage.setItem(i, JSON.stringify(reading));
       }
      });
-
     //$scope.orderProp = 'date';
   }])
 
-.controller('KelmaCtrl',  function($scope) {
-    var currentReading = '16/11/2015'
+.controller('KelmaCtrl', function($scope) {
+    var today = new Date();
+    var readingKey = "" + today.getFullYear() +  (today.getMonth()+1) + today.getDate();
+    //var tempFriendlyDate = ""
 
-    $scope.reading = (JSON.parse(window.localStorage[currentReading] || '{}'));
-    //console.log($scope.markdown);
-   // console.log($scope.reading);
+    $scope.readings = []; //to place all readings in local storage in an array
+    $scope.activeSlide = 0;
+
+    for (var i = 0; i < window.localStorage.length; i++ )
+    {
+      var reading = (JSON.parse(window.localStorage.getItem(i) || '{}'));
+
+      if (readingKey == reading.r_date)
+      {
+        //tempFriendlyDate = reading.r_friendlyDate;
+        //reading.r_friendlyDate = "";
+
+        $scope.activeSlide = i;
+        reading.r_newfriendlyDate = "Illum, " + reading.r_friendlyDate;
+      }
+
+      $scope.readings.push(reading);
+
+
+
+    }
+
+    $scope.slideHasChangedUpper = function(index)
+    {
+      console.log('upper changed' + index);
+    }
+
+    $scope.slideHasChangedLower = function(index)
+    {
+      console.log("lower changed " + index);
+    }
+
+    $scope.touch = function(a)
+    {
+      console.log(a);
+    }
+
+
+
+
 })
 
 .controller('AhsebCtrl', function($scope) {

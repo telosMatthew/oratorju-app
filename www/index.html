@@ -9,15 +9,13 @@
   <script src="lib/ionic/js/ionic.bundle.js"></script>
 
   <!-- Include compiled CSS from SASS and fonts -->
-  <!-- IMPORTANT TO INCLUDE THE CLOSING </SCRIPT> TAG, OTHERWISE, HC.MARKED IS NOT FOUND IN APP.JS -->
+  <!-- before app.js
+  IMPORTANT TO INCLUDE THE CLOSING </SCRIPT> TAG, OTHERWISE, HC.MARKED IS NOT FOUND IN APP.JS -->
 
-  <link href="css/ionic.app.css" rel="stylesheet">
-  <script src="lib/angular-resource/angular-resource.js"/>
-
-  <script src="lib/angular-sanitize/angular-sanitize.js"></script>
-  <script src="lib/showdown/src/showdown.js"></script>
-  <script src="lib/angular-markdown-directive/markdown.js"></script>
-
+  <link rel="stylesheet" type="text/css" href="css/ionic.app.css" >
+  <script src="lib/angular-resource/angular-resource.js"></script>
+  <script src="lib/marked/lib/marked.js"></script>
+  <script src="lib/angular-marked/dist/angular-marked.js"></script>
   <!-- Include Cordova -->
   <script src="cordova.js"></script>
 

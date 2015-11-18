@@ -9,10 +9,10 @@ serv.factory('Readings',['$resource',
 
     //setting default date to today - 14days
     var fromDate = new Date();
-    fromDate.setDate(fromDate.getDate()-14);
+    fromDate.setDate(fromDate.getDate()-30);
 
-    url+='readingsFrom/' + fromDate.getFullYear() + '-' + (fromDate.getMonth()+1) + '-' + fromDate.getDate();
-    console.log(url);
+    url+='readingsFrom/' + fromDate.getFullYear() +  (fromDate.getMonth()+1) + fromDate.getDate();
+
     return $resource(url, {},{
       query: {
         method: 'GET',
