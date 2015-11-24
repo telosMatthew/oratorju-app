@@ -1,10 +1,10 @@
 // Custom SCSS
 
 // Variables
-$mainColor: #831715;
+$mainColor: #414141;
 $secondColor: #FFFFE0;
 $spacerPadding: 5px;
-$shadingActive: #fff;
+$shadingActive: #CCB63A;
 
 // Header
 $bar-stable-text: $secondColor !important;
@@ -14,18 +14,18 @@ $bar-stable-bg: $mainColor !important;
 $bar-subheader-height: 45px;
 
 .bar-subheader .icon {
-	color: $mainColor !important;
+  color: $mainColor !important;
 }
 
 // Position arrows height
 .bar-subheader {
-	line-height: 37px !important;
+  line-height: 37px !important;
 }
 
 // Buttons
 $button-default-text: $secondColor !important;
-$button-default-bg: #984746 !important;
-$button-default-active-bg: $mainColor !important;
+$button-default-bg: #414141 !important;
+$button-default-active-bg: $shadingActive !important;
 
 // Button Bars
 $button-bar-button-padding: 4px !important;
@@ -36,31 +36,31 @@ $popover-width: 150px;
 $popover-height: 120px;
 
 $popover-border-radius:  4px !important;
-	
+
 // Text
 h1, h2, h3, h4 {
-	color: $mainColor !important; 
+  color: $mainColor !important;
 }
 
-$font-size-base:	15px !default;
+$font-size-base: 15px !default;
 
 // Link
-a { 
-	color: $mainColor !important;
-	text-decoration: none;
-	font-weight: bold;
+a {
+  color: $mainColor !important;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 // Other
 div.spacer {
-	width: 100%;
-	padding-top: $spacerPadding;
-	padding-bottom: $spacerPadding;
+  width: 100%;
+  padding-top: $spacerPadding;
+  padding-bottom: $spacerPadding;
 }
 
 div.divider {
-	width: 100%;
-	border-bottom: thin solid $mainColor;
+  width: 100%;
+  border-bottom: thin solid $mainColor;
 }
 
 // Include all of Ionic

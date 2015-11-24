@@ -1,58 +1,37 @@
 <ion-view title="Il-Kelma">
   <!-- Sub header -->
-  <ion-header-bar class="bar bar-subheader">
-    <!--
-            <i class="icon ion-chevron-left" style="float: left"></i>
-            <h2 class="title">Illum, 8 ta' Novembru</h2>
-            <i class="icon ion-chevron-right" style="float: right"></i>
-    -->
-    <!-- if we are going to use BUTTON CLICKS too to simulate slide left or right, we would have to call the method
-          slideHasChangedUpper & Lower, or would probably have to assign a delegate handle for each slide box and call
-          previous() or next(). Search: ionicSlideBoxDelegate
-    -->
-    <ion-slide-box on-slide-changed="slideHasChangedUpper($index)" show-pager="false" active-slide="activeSlide" delegate-handle="upperSlideBoHandle">
-      <ion-slide ng-repeat="reading in readings">
-        <h2>{{reading.r_friendlyDate}}</h2>
-      </ion-slide>
-    </ion-slide-box>
-  </ion-header-bar>
-  <!-- Content -->
-  <ion-content padding="true">
-    <div class="spacer"></div>
-    <img src="img/bible.jpg" width="100%" height="auto">
+    <ion-header-bar class="bar bar-subheader">
+      <!--
+              <i class="icon ion-chevron-left" style="float: left"></i>
+              <h2 class="title">Illum, 8 ta' Novembru</h2>
+              <i class="icon ion-chevron-right" style="float: right"></i>
+      -->
+      <!-- if we are going to use BUTTON CLICKS too to simulate slide left or right, we would have to call the method
+            slideHasChangedUpper & Lower, or would probably have to assign a delegate handle for each slide box and call
+            previous() or next(). Search: ionicSlideBoxDelegate
+      -->
 
-    <div class="spacer"></div>
-    <!-- Button bar to choose date -->
+      <h2>{{readingOfToday.r_newfriendlyDate}}</h2>
 
-    <div class="button-bar">
-      <a class="button" on-touch="touch($a)">I Qari</a>
-      <a class="button" on-touch="touch($a)">Salm</a>
-      <a class="button active" on-touch="touch($a)">II Qari</a>
-      <a class="button" on-touch="touch($a)">Vanġelu</a>
-    </div>
-    <ion-slide-box on-slide-changed="slideHasChangedLower($index)" show-pager="false" active-slide="activeSlide" delegate-handle="lowerSlideBoxHandle">
+    </ion-header-bar>
+    <!-- Content -->
+    <ion-content padding="true">
+      <div class="spacer"></div>
+      <img src="img/bible.jpg" width="100%" height="auto">
 
-      <ion-slide ng-repeat="reading in readings">
-        <div marked="reading.r_qari1">
+      <div class="spacer"></div>
+      <!-- Button bar to choose date -->
+      <div class="button-bar">
+        <a class="button" ng-click="touch('First Reading')" set-active>I Qari</a>
+        <a class="button" ng-click="touch('Psalm')" set-active>Salm</a>
+        <a class="button" ng-click="touch('Second Reading')" ng-show="showReading" set-active>II Qari</a>
+        <a class="button" ng-click="touch('Gospel')" set-active>Vanġelu</a>
 
-        </div>
-      </ion-slide>
+      </div>
 
-    </ion-slide-box>
-    <!--
-    <div marked="tst">
+      <div marked="activeReading">
 
-    </div>
-    -->
+      </div>
 
-
-    <!--
-    <div>{{reading.r_content}}
-        <p>Il-kelma li giet f'dehra lil Isaija bin Amos, dwar Guda u Gerusalemm.</p>
-        <p>Ghad jigri fl-ahhar jiem li l-gholja tad-dar tal-Mulej toghla 'l fuq mill-qcacet tal-muntanji, u tintrefa 'l fuq mill-gholjiet , lejha ghad jigru l-gnus kollha.</p>
-        <p>Kotra ta' popli ghad jigu u jghidu</p>
-    </div>
-    -->
-
-  </ion-content>
+    </ion-content>
 </ion-view>

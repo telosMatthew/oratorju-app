@@ -1,6 +1,14 @@
 angular.module('app.directives', [])
 
-.directive('blankDirective', [function(){
+app.directive('setActive', function(){
+  return function(scope, element, attrs){
+    element.on('click', function () {
+      $(this)
 
-}]);
+        .siblings()
+    });
+  };
+});
+
+
 
