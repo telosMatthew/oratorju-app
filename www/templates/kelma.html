@@ -1,47 +1,36 @@
-<ion-view title="Il-Kelma">
+<ion-view title="IL-KELMA">
   <!-- Sub header -->
   <!--
   <ion-header-bar class="bar bar-subheader">
-
-      <!--
               <i class="icon ion-chevron-left" style="float: left"></i>
               <h2 class="title">Illum, 8 ta' Novembru</h2>
               <i class="icon ion-chevron-right" style="float: right"></i>
-      -->
-      <!-- if we are going to use BUTTON CLICKS too to simulate slide left or right, we would have to call the method
-            slideHasChangedUpper & Lower, or would probably have to assign a delegate handle for each slide box and call
-            previous() or next(). Search: ionicSlideBoxDelegate
-      -->
-
-
-<!--
     </ion-header-bar>
   -->
-    <!-- Content -->
-    <ion-content padding="true">
+  <!-- Content -->
+  <ion-content padding="false">
 
-      <ion-slide-box active-slide="activeSlide" on-slide-changed="slideHasChanged($index)" delegate-handle="slideBoxHandle" show-pager="false">
-        <ion-slide ng-repeat="reading in readings">
-          <h2>{{reading.r_newfriendlyDate}}</h2>
-          <div class="spacer"></div>
-          <img src="img/bible.jpg" width="100%" height="auto">
+    <ion-slide-box active-slide="activeSlide" on-slide-changed="slideHasChanged($index)"
+                   delegate-handle="slideBoxHandle" show-pager="false">
+      <ion-slide ng-repeat="reading in readings">
+        <h2>{{reading.r_newfriendlyDate}}</h2>
+        <img src="img/bible.jpg" width="100%" height="auto">
+        <!-- Button bar to choose date -->
 
-      <div class="spacer"></div>
-      <!-- Button bar to choose date -->
-
-      <div class="button-bar">
-        <a class="button" ng-click="touch('0')" ng-class="{'active': isSelected == '0'}">I Qari</a>
-        <a class="button" ng-click="touch('1')" ng-class="{'active': isSelected == '1'}">Salm</a>
-        <a class="button" ng-click="touch('2')" ng-show="showReading" ng-class="{'active': isSelected == '2'}">II Qari</a>
-        <a class="button" ng-click="touch('3')" ng-class="{'active': isSelected == '3'}">Vanġelu</a>
-      </div>
+        <div class="button-bar">
+          <a class="button" ng-click="touch('0')" ng-class="{'active': isSelected == '0'}">I QARI</a>
+          <a class="button" ng-click="touch('1')" ng-class="{'active': isSelected == '1'}">SALM</a>
+          <a class="button" ng-click="touch('2')" ng-show="showReading" ng-class="{'active': isSelected == '2'}">II
+            QARI</a>
+          <a class="button" ng-click="touch('3')" ng-class="{'active': isSelected == '3'}">VANĠELU</a>
+        </div>
 
 
-          <div marked="activeReading">
+        <div marked="activeReading">
 
-          </div>
-        </ion-slide>
-      </ion-slide-box>
+        </div>
+      </ion-slide>
+    </ion-slide-box>
 
-    </ion-content>
+  </ion-content>
 </ion-view>

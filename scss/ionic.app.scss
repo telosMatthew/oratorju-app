@@ -6,6 +6,20 @@ $secondColor: #FFFFE0;
 $spacerPadding: 5px;
 $shadingActive: #CCB63A;
 
+// Fonts
+$avenir-light-font-path: "../fonts/custom/avenir-light.ttf" !default;
+$avenir-medium-font-path: "../fonts/custom/avenir-medium.ttf" !default;
+
+@font-face {
+  font-family: "avenir-light";
+  src: url("#{$avenir-light-font-path}"),
+}
+
+@font-face {
+  font-family: "avenir-medium";
+  src: url("#{$avenir-medium-font-path}"),
+}
+
 // Header
 $bar-stable-text: $secondColor !important;
 $bar-stable-bg: $mainColor !important;
@@ -30,6 +44,7 @@ $button-default-active-bg: $shadingActive !important;
 // Button Bars
 $button-bar-button-padding: 4px !important;
 $button-font-size:  15px !important;
+$button-bar-button-icon-size: 20px !important;
 
 // Popover
 $popover-width: 150px;
@@ -41,6 +56,16 @@ $popover-border-radius:  4px !important;
 h1, h2, h3, h4 {
   color: $mainColor !important;
 }
+
+h2 {
+	font-size: 20px !important;
+}
+h3 {
+	font-size: 19px !important;
+}
+
+$headings-font-family: "avenir-medium" !important;
+$font-family-base: "avenir-light" !important;
 
 $font-size-base: 15px !default;
 
