@@ -76,36 +76,40 @@ angular.module('app.controllers', ['ionic','app.services'])
 
       $scope.readings.push(reading);
     }
-  console.log($scope.readingOfToday);
-    // Initialise active reading
+  
+    // Initialise active reading to the first reading and button state to the first button
     $scope.activeReading = $scope.readingOfToday.r_qari1;
-
+	$scope.isSelected = '0';
+	
     // Function to change reading
     $scope.touch = function(index) {
-      console.log(index);
+      // Set selected button
+	  $scope.isSelected = index;
+		
+	  // Change reading
       switch (index) {
-        case 'First Reading':
+        case '0':
           $scope.activeReading = $scope.readingOfToday.r_qari1;
           break;
-        case 'Psalm':
+        case '1':
           $scope.activeReading = $scope.readingOfToday.r_salm;
           break;
-        case 'Second Reading':
+        case '2':
           $scope.activeReading = $scope.readingOfToday.r_qari2;
           break;
-        case 'Gospel':
+        case '3':
           $scope.activeReading = $scope.readingOfToday.r_vangelu;
           break;
         default:
           $scope.activeReading = $scope.readingOfToday.r_qari1;
-      }
+      }	
     }
 
+	// Function to show/hide the second reading according to the day
     if ($scope.readingOfToday.r_qari2 == "")
       $scope.showReading = false;
     else
       $scope.showReading = true;
-
 
     $scope.slideHasChangedUpper = function(index)
     {

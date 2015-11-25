@@ -22,11 +22,10 @@
       <div class="spacer"></div>
       <!-- Button bar to choose date -->
       <div class="button-bar">
-        <a class="button" ng-click="touch('First Reading')" set-active>I Qari</a>
-        <a class="button" ng-click="touch('Psalm')" set-active>Salm</a>
-        <a class="button" ng-click="touch('Second Reading')" ng-show="showReading" set-active>II Qari</a>
-        <a class="button" ng-click="touch('Gospel')" set-active>Vanġelu</a>
-
+        <a class="button" ng-click="touch('0')" ng-class="{'active': isSelected == '0'}">I Qari</a>
+        <a class="button" ng-click="touch('1')" ng-class="{'active': isSelected == '1'}">Salm</a>
+        <a class="button" ng-click="touch('2')" ng-show="showReading" ng-class="{'active': isSelected == '2'}"">II Qari</a>
+        <a class="button" ng-click="touch('3')" ng-class="{'active': isSelected == '3'}"">Vanġelu</a>
       </div>
 
       <div marked="activeReading">
