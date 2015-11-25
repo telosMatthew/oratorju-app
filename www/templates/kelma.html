@@ -1,6 +1,8 @@
 <ion-view title="Il-Kelma">
   <!-- Sub header -->
-    <ion-header-bar class="bar bar-subheader">
+  <!--
+  <ion-header-bar class="bar bar-subheader">
+
       <!--
               <i class="icon ion-chevron-left" style="float: left"></i>
               <h2 class="title">Illum, 8 ta' Novembru</h2>
@@ -11,16 +13,22 @@
             previous() or next(). Search: ionicSlideBoxDelegate
       -->
 
-      <h2>{{readingOfToday.r_newfriendlyDate}}</h2>
+
 
     </ion-header-bar>
+  -->
     <!-- Content -->
     <ion-content padding="true">
-      <div class="spacer"></div>
-      <img src="img/bible.jpg" width="100%" height="auto">
+
+      <ion-slide-box>
+        <ion-slide>
+          <h2>{{readingOfToday.r_newfriendlyDate}}</h2>
+          <div class="spacer"></div>
+          <img src="img/bible.jpg" width="100%" height="auto">
 
       <div class="spacer"></div>
       <!-- Button bar to choose date -->
+
       <div class="button-bar">
         <a class="button" ng-click="touch('First Reading')" set-active>I Qari</a>
         <a class="button" ng-click="touch('Psalm')" set-active>Salm</a>
@@ -29,9 +37,12 @@
 
       </div>
 
-      <div marked="activeReading">
 
-      </div>
+          <div marked="activeReading">
+
+          </div>
+        </ion-slide>
+      </ion-slide-box>
 
     </ion-content>
 </ion-view>
