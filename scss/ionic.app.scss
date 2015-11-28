@@ -47,10 +47,11 @@ $button-font-size:  15px !important;
 $button-bar-button-icon-size: 20px !important;
 
 // Popover
-$popover-width: 155px;
-$popover-height: 60px;
+$popover-width: 163px;
+$popover-height: 70px;
 
-$popover-border-radius:  4px !important;
+$popover-border-radius:  2px !important;
+$popover-border-radius-ios:  2px !important;
 
 // List
 .item-divider {
