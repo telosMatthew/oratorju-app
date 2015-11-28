@@ -29,10 +29,10 @@ angular.module('app.routes', [])
 		templateUrl: 'templates/rizorsi.html',
 		controller: 'RizorsiCtrl'
 	})
-    .state('app.kuntatt', {
-		url: '/kuntatt',
-		templateUrl: 'templates/kuntatt.html', 
-		controller: 'KuntattCtrl'
+    .state('app.dettalji', {
+		url: '/dettalji',
+		templateUrl: 'templates/dettalji.html', 
+		controller: 'DettaljiCtrl'
     })   
  
   // If none of the above states are matched, use this as the fallback

@@ -13,6 +13,10 @@
 .bar-subheader {
   line-height: 37px !important; }
 
+.item-divider {
+  font-size: 19px !important;
+  font-weight: bold !important; }
+
 h1, h2, h3, h4 {
   color: #414141 !important; }
 
@@ -5373,9 +5377,9 @@ ion-tabs.tabs-color-active-dark .tab-item {
   z-index: 10;
   display: block;
   margin-top: 12px;
-  margin-left: -75px;
-  height: 120px;
-  width: 150px;
+  margin-left: -77.5px;
+  height: 60px;
+  width: 155px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   opacity: 0; }
@@ -6010,11 +6014,11 @@ a.item-content {
   position: absolute;
   top: 0;
   height: 100%;
-  font-size: 32px; }
+  font-size: 25px !important; }
   .item-icon-left .icon:before,
   .item-icon-right .icon:before {
     display: block;
-    width: 32px;
+    width: 25px !important;
     text-align: center; }
 
 .item .fill-icon {
@@ -6084,8 +6088,8 @@ a.item-content {
   position: absolute;
   top: 8px;
   left: 11px;
-  min-width: 34px;
-  min-height: 34px;
+  min-width: 25px !important2px;
+  min-height: 25px !important2px;
   font-size: 18px;
   line-height: 32px; }
   .item-button-left > .button .icon:before,
@@ -6093,11 +6097,11 @@ a.item-content {
     position: relative;
     left: auto;
     width: auto;
-    line-height: 31px; }
+    line-height: 25px !important-"1"; }
   .item-button-left > .button > .button,
   .item-button-left .item-content > .button > .button {
     margin: 0px 2px;
-    min-height: 34px;
+    min-height: 25px !important2px;
     font-size: 18px;
     line-height: 32px; }
 
@@ -6124,8 +6128,8 @@ button.item.item-button-right {
   position: absolute;
   top: 8px;
   right: 16px;
-  min-width: 34px;
-  min-height: 34px;
+  min-width: 25px !important2px;
+  min-height: 25px !important2px;
   font-size: 18px;
   line-height: 32px; }
   .item-button-right > .button .icon:before,
@@ -6135,14 +6139,14 @@ button.item.item-button-right {
     position: relative;
     left: auto;
     width: auto;
-    line-height: 31px; }
+    line-height: 25px !important-"1"; }
   .item-button-right > .button > .button,
   .item-button-right .item-content > .button > .button,
   .item-button-right > .buttons > .button,
   .item-button-right .item-content > .buttons > .button {
     margin: 0px 2px;
-    min-width: 34px;
-    min-height: 34px;
+    min-width: 25px !important2px;
+    min-height: 25px !important2px;
     font-size: 18px;
     line-height: 32px; }
 

@@ -145,7 +145,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
 
   })
 
-  .controller('KuntattCtrl', function ($scope) {
+  .controller('DettaljiCtrl', function ($scope) {
 
   })
 
