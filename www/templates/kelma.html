@@ -1,22 +1,13 @@
 <ion-view title="IL-KELMA">
-  <!-- Sub header -->
-  <!--
-  <ion-header-bar class="bar bar-subheader">
-              <i class="icon ion-chevron-left" style="float: left"></i>
-              <h2 class="title">Illum, 8 ta' Novembru</h2>
-              <i class="icon ion-chevron-right" style="float: right"></i>
-    </ion-header-bar>
-  -->
-  <!-- Content -->
-  <ion-content padding="false">
-
-    <ion-slide-box active-slide="activeSlide" on-slide-changed="slideHasChanged($index)"
-                   delegate-handle="slideBoxHandle" show-pager="false">
-      <ion-slide ng-repeat="reading in readings">
-        <h2>{{reading.r_newfriendlyDate}}</h2>
-        <img src="img/bible.jpg" width="100%" height="auto">
+	<!-- Content -->
+	<ion-content padding="false">
+		<ion-slide-box active-slide="activeSlide" on-slide-changed="slideHasChanged($index)" delegate-handle="slideBoxHandle" show-pager="false">
+		<ion-slide ng-repeat="reading in readings">
+		<!-- Date -->
+		<h4 style="text-align: center; margin-top: 10px">{{reading.r_friendlyDate}}</h4>
+		<!-- Image -->
+		<img src="img/bible.jpg" width="100%" height="auto">
         <!-- Button bar to choose date -->
-
         <div class="button-bar">
           <a class="button" ng-click="touch('0')" ng-class="{'active': isSelected == '0'}">I QARI</a>
           <a class="button" ng-click="touch('1')" ng-class="{'active': isSelected == '1'}">SALM</a>
@@ -24,11 +15,8 @@
             QARI</a>
           <a class="button" ng-click="touch('3')" ng-class="{'active': isSelected == '3'}">VANĠELU</a>
         </div>
-
-
-        <div marked="activeReading">
-
-        </div>
+		<!-- Reading -->
+        <div marked="activeReading" class="padding"></div>
       </ion-slide>
     </ion-slide-box>
 

@@ -15,7 +15,13 @@ angular.module('app',['ionic','app.controllers', 'app.routes', 'app.directives',
 
   });
 })
-  //reset the controller each time it is accessed
-.config(function($ionicConfigProvider){
+
+.config(function($ionicConfigProvider) {
+	// Reset the controller each time it is accessed
     $ionicConfigProvider.views.maxCache(0);
-  });
+
+	// Center align title on android
+	$ionicConfigProvider.navBar.alignTitle('center');
+});
+
+
