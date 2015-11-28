@@ -4,9 +4,13 @@
 		<ion-slide-box active-slide="activeSlide" on-slide-changed="slideHasChanged($index)" delegate-handle="slideBoxHandle" show-pager="false">
 		<ion-slide ng-repeat="reading in readings">
 		<!-- Date -->
-		<h4 style="text-align: center; margin-top: 10px">{{reading.r_friendlyDate}}</h4>
 		<!-- Image -->
-		<img src="img/bible.jpg" width="100%" height="auto">
+		<img src="img/bible.jpg" style="position: relative; width: 100%; height: auto">
+		<div class="overlay">
+			<h4 class="overlay-title">
+				{{reading.r_friendlyDate}}	
+			</h4>
+		</div>
         <!-- Button bar to choose date -->
         <div class="button-bar">
           <a class="button" ng-click="touch('0')" ng-class="{'active': isSelected == '0'}">I QARI</a>
