@@ -2,7 +2,7 @@ angular.module('app.routes', [])
 
 // Defines routes and states for the different pages
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-  $stateProvider 
+  $stateProvider
     .state('app', {
 		url: '/app',
 		abstract: true,
@@ -15,15 +15,15 @@ angular.module('app.routes', [])
 		controller: 'HomeCtrl'
     })
     .state('app.kelma', {
-		url: '/kelma', 
+		url: '/kelma',
 		templateUrl: 'templates/kelma.html',
 		controller: 'KelmaCtrl'
     })
     .state('app.ahseb', {
 		url: '/ahseb',
 		templateUrl: 'templates/ahseb.html',
-		controller: 'AhsebCtrl'
-    }) 
+		controller: 'a'
+    })
     .state('app.rizorsi', {
 		url: '/rizorsi',
 		templateUrl: 'templates/rizorsi.html',
@@ -31,13 +31,13 @@ angular.module('app.routes', [])
 	})
     .state('app.dettalji', {
 		url: '/dettalji',
-		templateUrl: 'templates/dettalji.html', 
+		templateUrl: 'templates/dettalji.html',
 		controller: 'DettaljiCtrl'
-    })   
- 
+    })
+
   // If none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
-  
+
   // Remove the text from showing next to back button
   $ionicConfigProvider.backButton.text('').icon('ion-ios-arrow-back').previousTitleText(false);
 });

@@ -1,18 +1,28 @@
-<ion-view title="AHSEB FTIT">
+<ion-view title="AĦSEB FTIT">
 	<!-- Sub header -->
-	<ion-header-bar class="bar bar-subheader">
-		<i class="icon ion-chevron-left" style="float: left"></i>
-		<h2 class="title">Illum, 8 ta' Novembru</h2>
-		<i class="icon ion-chevron-right" style="float: right"></i>
-	</ion-header-bar>
-	<!-- Content -->
-    <ion-content padding="true">
-		<div class="spacer"></div>
-        <img src="/img/praying.jpg" width="100%" height="auto">
-        <h4>Ghalfejn din il-biza kollha?</h4>
-        <div>
-            <p>Nafu li Gesu' "ghadu ma giex" ghal parti kbira mill-umanita'; gie f'xi popli imma mhux f'kollha: ghadu mhux maghruf minn kulhadd. Hemm inhawi fid-dinja li ghalihom Gesu qatt ma twieled. Il-Gisem Mistiku ta' Kristu ghadu ma lahaqx il-milja
-                tieghu, kif jghid San Pawl: "il-pagani huma msejha biex ikollhom sehem mill-istess gisem" (Ef 3,6)..."Jieen issa</p>
+  <ion-content padding="false">
+    <ion-slide-box active-slide="activeSlide" on-slide-changed="slideHasChanged($index)" delegate-handle="slideBoxHandle" show-pager="false">
+      <ion-slide ng-repeat="thought in thoughts">
+        <!-- Date -->
+        <!-- Image -->
+        <div style="position: relative">
+          <img src="img/praying.jpg" style="position: relative; width: 100%; height: auto; margin-bottom: -7px; ">
+          <div class="overlay">
+            <div class="icon ion-ios-arrow-back" style="float:left; font-size:1.4em; color: #FFFFE0!important">
+
+            </div>
+            <h4 class="overlay-title" style="float:left;">
+              {{thought.t_newfriendlyDate}}
+            </h4>
+            <div class="icon ion-ios-arrow-forward" style="float:right; font-size:1.4em; color: #FFFFE0!important">
+
+            </div>
+          </div>
         </div>
-    </ion-content> 
-</ion-view> 
+
+        <div marked="activeThought" class="padding"></div>
+      </ion-slide>
+    </ion-slide-box>
+
+  </ion-content>
+</ion-view>

@@ -11,9 +11,25 @@ serv.factory('Readings',['$resource',
     var fromDate = new Date();
     fromDate.setDate(fromDate.getDate()-30);
 
-    url+='readingsFrom/' + fromDate.getFullYear() +  (fromDate.getMonth()+1) + fromDate.getDate();
+    var tempUrl = url + 'readingsFrom/' + fromDate.getFullYear() +  (fromDate.getMonth()+1) + fromDate.getDate();
 
-    return $resource(url, {},{
+    return $resource(tempUrl, {},{
+      query: {
+        method: 'GET',
+        isArray:true
+      }
+    });
+  }]);
+
+serv.factory('Thoughts',['$resource',
+  function($resource){
+    //setting default date to today - 14days
+    var fromDate = new Date();
+    fromDate.setDate(fromDate.getDate()-30);
+
+    var tempUrl = url + 'thoughtsFrom/' + fromDate.getFullYear() +  (fromDate.getMonth()+1) + fromDate.getDate();
+
+    return $resource(tempUrl, {},{
       query: {
         method: 'GET',
         isArray:true

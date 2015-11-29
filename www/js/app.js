@@ -1,6 +1,10 @@
-angular.module('app',['ionic','app.controllers', 'app.routes', 'app.directives','hc.marked'])
+angular.module('app',['ionic','app.controllers', 'app.routes', 'app.directives','hc.marked','ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaSplashscreen) {
+
+    setTimeout(function() {
+      $cordovaSplashscreen.hide()
+    })
   $ionicPlatform.ready(function() {
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

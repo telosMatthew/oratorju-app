@@ -5,11 +5,19 @@
 		<ion-slide ng-repeat="reading in readings">
 		<!-- Date -->
 		<!-- Image -->
-		<img src="img/bible.jpg" style="position: relative; width: 100%; height: auto; margin-bottom: -6px; ">
-		<div class="overlay">
-			<h4 class="overlay-title">
-				{{reading.r_friendlyDate}}
+		<div style="position: relative">
+      <img src="img/bible.jpg" style="position: relative; width: 100%; height: auto; margin-bottom: -7px; ">
+			<div class="overlay">
+        <div class="icon ion-ios-arrow-back" style="float:left;font-size:1.4em; color: #FFFFE0!important">
+
+        </div>
+      <h4 class="overlay-title" style="float:left;">
+				{{reading.r_newfriendlyDate}}
 			</h4>
+        <div class="icon ion-ios-arrow-forward" style="float:right;font-size:1.4em; color: #FFFFE0!important">
+
+        </div>
+      </div>
 		</div>
         <!-- Button bar to choose date -->
         <div class="button-bar">
