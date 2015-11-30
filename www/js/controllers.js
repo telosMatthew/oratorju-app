@@ -63,6 +63,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
         window.localStorage.setItem(key, JSON.stringify(thought));
       }
     });
+
   }])
 
   .controller('KelmaCtrl', function ($scope, $ionicSlideBoxDelegate) {
@@ -71,10 +72,15 @@ angular.module('app.controllers', ['ionic', 'app.services'])
     var today = new Date();
     var readingKey = "" + today.getFullYear() + (today.getMonth() + 1) + today.getDate();
     var storageLength = window.localStorage.length;
+    var maxReading = 0;//will display the latest reading for user if activeSlide remains zero
+    var readingTodayFound = false; //indicates whether today's reading is found
     $scope.readingOfToday = {}; //will store all text of today's reading
     $scope.readings = []; //to place all readings in local storage in an array
+    $scope.hasTomorrow = 0; // to check if there is tomorrow's reading
+    $scope.hasYesterday = 0; // to check if there is yesterday's reading
     $scope.activeSlide = 0;
     $scope.activeReading = ""; //text currently shown to user
+
 
     //find today's reading and set at as the acive slide
     for (var i = 0; i < storageLength; i++) {
@@ -86,7 +92,9 @@ angular.module('app.controllers', ['ionic', 'app.services'])
       //will help us be more space efficient and avoid creating empty objects in localStorage
       if (Object.keys(reading).length != 0) // if object not empty
       {
+        maxReading = i;
         if (readingKey == reading.r_date) {
+          readingTodayFound = true;
           $scope.activeSlide = i;
           reading.r_newfriendlyDate = "Illum, " + reading.r_friendlyDate;
         }
@@ -98,6 +106,29 @@ angular.module('app.controllers', ['ionic', 'app.services'])
         $scope.readings.push(reading);
       }
     }
+
+    //activeSlide may be zero and it may be today's reading, so we do this check
+    if (!readingTodayFound && $scope.activeSlide == 0)
+    {
+      //set to most recent slide
+      $scope.activeSlide = maxReading;
+    }
+
+    // Check if there is tomorrow's reading
+    // TO DO - move to central controller
+    if (JSON.parse(window.localStorage.getItem("r" + ($scope.activeSlide + 1)))) {
+      $scope.hasTomorrow = 1;
+    }
+    else
+      $scope.hasTomorrow = 0;
+
+    // Check if there is today's reading
+    // TO DO - move to central controller
+    if (JSON.parse(window.localStorage.getItem("r" + ($scope.activeSlide - 1))) != null) {
+      $scope.hasYesterday = 1;
+    }
+    else
+      $scope.hasYesterday = 0;
 
     // Initialise active reading to the first reading and button state to the first button
     $scope.readingOfToday = (JSON.parse(window.localStorage["r" + $scope.activeSlide] || '{}'));
@@ -136,7 +167,10 @@ angular.module('app.controllers', ['ionic', 'app.services'])
 
     //set contents according to the new day set
     $scope.slideHasChanged = function (index) {
+      $scope.activeSlide = index;
       $scope.readingOfToday = (JSON.parse(window.localStorage["r" + index] || '{}')); //set the reading object of the current day
+      $scope.hasTomorrow = 0; // to check if there is tomorrow's reading
+      $scope.hasYesterday = 0; // to check if there is yesterday's reading
       $scope.activeReading = $scope.readingOfToday.r_qari1; //set the current visible text to the first reading
       $scope.isSelected = '0'; //change the selected tab and its class
       //$ionicSlideBoxDelegate.$getByHandle('slideBoxHandle').update(); //finally refresh contents on slidebox
@@ -145,6 +179,22 @@ angular.module('app.controllers', ['ionic', 'app.services'])
         $scope.showReading = false;
       else
         $scope.showReading = true;
+
+      // Check if there is tomorrow's reading
+      // TO DO - move to central controller
+      if (JSON.parse(window.localStorage.getItem("r" + ($scope.activeSlide + 1)))) {
+        $scope.hasTomorrow = 1;
+      }
+      else
+        $scope.hasTomorrow = 0;
+
+      // Check if there is today's reading
+      // TO DO - move to central controller
+      if (JSON.parse(window.localStorage.getItem("r" + ($scope.activeSlide - 1))) != null) {
+        $scope.hasYesterday = 1;
+      }
+      else
+        $scope.hasYesterday = 0;
     }
 
     $scope.next = function() {
@@ -162,10 +212,15 @@ angular.module('app.controllers', ['ionic', 'app.services'])
     var today = new Date();
     var thoughtKey = "" + today.getFullYear() + (today.getMonth() + 1) + today.getDate();
     var storageLength = window.localStorage.length;
+    var maxThought = 0;//will display the latest thought for user if activeSlide remains zero
+    var thoughtTodayFound = false; //indicates whether today's thought is found
     $scope.thoughtOfToday = {}; //will store all text of today's reading
     $scope.thoughts = []; //to place all thoughts in local storage in an array
     $scope.activeSlide = 0;
+    $scope.hasTomorrow = 0;// to check if there is tomorrow's thought
+    $scope.hasYesterday = 0;// to check if there is yesterday's thought
     $scope.activeThought = ""; //text currently shown to user
+
 
     //find today's thought and set at as the active slide
     for (var i = 0; i < storageLength; i++) {
@@ -177,7 +232,9 @@ angular.module('app.controllers', ['ionic', 'app.services'])
       //will help us be more space efficient and avoid creating empty objects in localStorage
       if (Object.keys(thought).length != 0) // if object not empty
       {
+        maxThought = i;
         if (thoughtKey == thought.t_date) {
+          thoughtTodayFound = true;
           $scope.activeSlide = i;
           thought.t_newfriendlyDate = "Illum, " + thought.t_friendlyDate;
         }
@@ -190,6 +247,29 @@ angular.module('app.controllers', ['ionic', 'app.services'])
       }
     }
 
+    //activeSlide may be zero and it may be today's thought, so we do this check
+    if (!thoughtTodayFound && $scope.activeSlide == 0)
+    {
+      //set to most recent slide
+      $scope.activeSlide = maxThought;
+    }
+
+    // Check if there is tomorrow's thought
+    // TO DO - move to central controller
+    if (JSON.parse(window.localStorage.getItem("t" + ($scope.activeSlide + 1)))) {
+      $scope.hasTomorrow = 1;
+    }
+    else
+      $scope.hasTomorrow = 0;
+
+    // Check if there is today's thought
+    // TO DO - move to central controller
+    if (JSON.parse(window.localStorage.getItem("t" + ($scope.activeSlide - 1))) != null) {
+      $scope.hasYesterday = 1;
+    }
+    else
+      $scope.hasYesterday = 0;
+
     // Initialise active reading to the first reading and button state to the first button
     $scope.thoughtOfToday = (JSON.parse(window.localStorage["t" + $scope.activeSlide] || '{}'));
     $scope.activeThought = $scope.thoughtOfToday.t_content;
@@ -197,9 +277,27 @@ angular.module('app.controllers', ['ionic', 'app.services'])
 
     //set contents according to the new day set
     $scope.slideHasChanged = function (index) {
+      $scope.activeSlide = index;
       $scope.thoughtOfToday = (JSON.parse(window.localStorage["t" + index] || '{}')); //set the reading object of the current day
+      $scope.hasTomorrow = 0; // to check if there is tomorrow's reading
+      $scope.hasYesterday = 0; // to check if there is yesterday's reading
       $scope.activeThought = $scope.thoughtOfToday.t_content; //set the current visible text to the first reading
 
+      // Check if there is tomorrow's thought
+      // TO DO - move to central controller
+      if (JSON.parse(window.localStorage.getItem("t" + ($scope.activeSlide + 1)))) {
+        $scope.hasTomorrow = 1;
+      }
+      else
+        $scope.hasTomorrow = 0;
+
+      // Check if there is today's reading
+      // TO DO - move to central controller
+      if (JSON.parse(window.localStorage.getItem("t" + ($scope.activeSlide - 1))) != null) {
+        $scope.hasYesterday = 1;
+      }
+      else
+        $scope.hasYesterday = 0;
     }
 
     $scope.next = function() {
