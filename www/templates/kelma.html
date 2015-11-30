@@ -1,6 +1,7 @@
-<ion-view title="IL-KELMA">
+<ion-view title="IL-KELMA" style="background-color: -webkit-linear-gradient(rgba(255,255,255,0.7),rgba(255,255,255,0.5))!important;
+">
 	<!-- Content -->
-	<ion-content padding="false">
+	<ion-content padding="false" style="position: absolute!important; top: 0px!important";>
 		<ion-slide-box active-slide="activeSlide" on-slide-changed="slideHasChanged($index)" delegate-handle="slideBoxHandle" show-pager="false">
 		<ion-slide ng-repeat="reading in readings">
 		<!-- Date -->
@@ -8,13 +9,13 @@
 		<div style="position: relative">
       <img src="img/bible.jpg" style="position: relative; width: 100%; height: auto; margin-bottom: -7px; ">
 			<div class="overlay">
-        <div class="icon ion-ios-arrow-back" style="float:left;font-size:1.4em; color: #FFFFE0!important">
+        <div class="icon ion-ios-arrow-back" style="float:left;font-size:1.4em; color: #FFFFE0!important" ng-click="previous()">
 
         </div>
       <h4 class="overlay-title" style="float:left;">
 				{{reading.r_newfriendlyDate}}
 			</h4>
-        <div class="icon ion-ios-arrow-forward" style="float:right;font-size:1.4em; color: #FFFFE0!important">
+        <div class="icon ion-ios-arrow-forward" style="float:right;font-size:1.4em; color: #FFFFE0!important" ng-click="next()">
 
         </div>
       </div>

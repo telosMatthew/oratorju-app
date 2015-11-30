@@ -147,6 +147,14 @@ angular.module('app.controllers', ['ionic', 'app.services'])
         $scope.showReading = true;
     }
 
+    $scope.next = function() {
+      $ionicSlideBoxDelegate.next();
+    }
+
+    $scope.previous = function() {
+      $ionicSlideBoxDelegate.previous();
+    }
+
   })
 
   .controller('a', function ($scope, $ionicSlideBoxDelegate) {
@@ -192,6 +200,14 @@ angular.module('app.controllers', ['ionic', 'app.services'])
       $scope.thoughtOfToday = (JSON.parse(window.localStorage["t" + index] || '{}')); //set the reading object of the current day
       $scope.activeThought = $scope.thoughtOfToday.t_content; //set the current visible text to the first reading
 
+    }
+
+    $scope.next = function() {
+      $ionicSlideBoxDelegate.next();
+    }
+
+    $scope.previous = function() {
+      $ionicSlideBoxDelegate.previous();
     }
   })
 
