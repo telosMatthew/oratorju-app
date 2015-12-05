@@ -25,45 +25,86 @@ angular.module('app.controllers', ['ionic', 'app.services'])
     });
   })
 
-  .controller('HomeCtrl', ['$scope', 'Readings', 'Thoughts', function ($scope, Readings, Thoughts) {
+  .controller('HomeCtrl', ['$scope', '$http', 'Readings', 'Thoughts', '$timeout', '$cordovaFileTransfer', '$cordovaFile', '$ionicPlatform', function ($scope, $http, Readings, Thoughts, $timeout, $cordovaFileTransfer, $cordovaFile, $ionicPlatform) {
     //to be able to read the data retrieve, since a promise is used, we need
     //access the data through a callback function, hence the anonymous function in query()
-    $scope.readings = Readings.query(function () {
 
-      for (var i = 0; i < $scope.readings.length; i++) {
+    $ionicPlatform.ready(function() {
 
-        var reading =
-        {
-          r_date: $scope.readings[i].r_date,
-          r_friendlyDate: $scope.readings[i].r_friendlyDate,
-          r_qari1: $scope.readings[i].r_qari1,
-          r_salm: $scope.readings[i].r_salm,
-          r_qari2: $scope.readings[i].r_qari2,
-          r_vangelu: $scope.readings[i].r_vangelu
-        }
+      screen.lockOrientation('portrait');
 
-        var key = "r" + i;
-        window.localStorage.setItem(key, JSON.stringify(reading));
-      }
-    });
-    //$scope.orderProp = 'date';
+      $cordovaFile.checkDir(targetPath,"./Uploads").
+        then(function(success){
 
-    $scope.thoughts = Thoughts.query(function () {
+        },function(error){
+          $cordovaFile.createDir(cordova.file.dataDirectory, "./Uploads", true)
+            .then(function (success) {
+                }, function (error) {
+            });
+        });
 
-      for (var i = 0; i < $scope.thoughts.length; i++) {
+      var url = 'http://oratorjumssp-001-site1.btempurl.com/'
+       var targetPath = cordova.file.dataDirectory;
+       var trustHosts = true;
+       var options = {};
 
-        var thought =
-        {
-          t_date: $scope.thoughts[i].t_date,
-          t_friendlyDate: $scope.thoughts[i].t_friendlyDate,
-          t_content: $scope.thoughts[i].t_content,
-          //t_image: $scope.thoughts[i].t_image
-        }
-        var key = "t" + i;
-        window.localStorage.setItem(key, JSON.stringify(thought));
-      }
-    });
+      $scope.readings = Readings.query(function () {
 
+         for (var i = 0; i < $scope.readings.length; i++) {
+
+           var reading =
+           {
+             r_date: $scope.readings[i].r_date,
+             r_friendlyDate: $scope.readings[i].r_friendlyDate,
+             r_qari1: $scope.readings[i].r_qari1,
+             r_salm: $scope.readings[i].r_salm,
+             r_qari2: $scope.readings[i].r_qari2,
+             r_vangelu: $scope.readings[i].r_vangelu
+           }
+
+           var key = "r" + i;
+           window.localStorage.setItem(key, JSON.stringify(reading));
+         }
+       });
+       //$scope.orderProp = 'date';
+
+       $scope.thoughts = Thoughts.query(function () {
+
+         for (var i = 0; i < $scope.thoughts.length; i++) {
+
+           console.log('url ' + (url + $scope.thoughts[i].t_image));
+           console.log(targetPath + $scope.thoughts[i].t_image);
+
+           $cordovaFileTransfer.download(
+             url + $scope.thoughts[i].t_image,
+             targetPath + $scope.thoughts[i].t_image,
+             options,
+             trustHosts)
+             .then(function (result) {
+               console.log('result ' + result);
+             }), function (err) {
+             console.log('err ' + err);
+           }, function (progress) {
+             console.log('progress ' + progress)
+             $timeout(function () {
+               $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+               console.log($scope.downoadProgress)
+             })
+           }
+
+           var thought =
+           {
+             t_date: $scope.thoughts[i].t_date,
+             t_friendlyDate: $scope.thoughts[i].t_friendlyDate,
+             t_content: $scope.thoughts[i].t_content,
+             t_image: targetPath + $scope.thoughts[i].t_image
+           }
+
+           var key = "t" + i;
+           window.localStorage.setItem(key, JSON.stringify(thought));
+         }
+       });
+     });
   }])
 
   .controller('KelmaCtrl', function ($scope, $ionicSlideBoxDelegate) {
