@@ -9,7 +9,7 @@ serv.factory('Readings',['$resource',
 
     //setting default date to today - 14days
     var fromDate = new Date();
-    fromDate.setDate(fromDate.getDate()-30);
+    fromDate.setDate(fromDate.getDate()-10);
 
     var tempUrl = url + 'readingsFrom/' + fromDate.getFullYear() +  (fromDate.getMonth()+1) + fromDate.getDate();
 
@@ -25,9 +25,25 @@ serv.factory('Thoughts',['$resource',
   function($resource){
     //setting default date to today - 14days
     var fromDate = new Date();
-    fromDate.setDate(fromDate.getDate()-30);
+    fromDate.setDate(fromDate.getDate()-10);
 
     var tempUrl = url + 'thoughtsFrom/' + fromDate.getFullYear() +  (fromDate.getMonth()+1) + fromDate.getDate();
+
+    return $resource(tempUrl, {},{
+      query: {
+        method: 'GET',
+        isArray:true
+      }
+    });
+  }]);
+
+serv.factory('Articles',['$resource',
+  function($resource){
+    //setting default date to today - 14days
+    var fromDate = new Date();
+    fromDate.setDate(fromDate.getDate()-10);
+
+    var tempUrl = url + 'articlesFrom/' + fromDate.getFullYear() +  (fromDate.getMonth()+1) + fromDate.getDate();
 
     return $resource(tempUrl, {},{
       query: {

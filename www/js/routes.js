@@ -10,6 +10,7 @@ angular.module('app.routes', [])
 		controller: 'AppCtrl'
 	})
     .state('app.home', {
+    cache: false,// when cache is false, homeCtrl is called everytime the screen is accessed
 		url: '/home',
 		templateUrl: 'templates/home.html',
 		controller: 'HomeCtrl'
@@ -22,7 +23,7 @@ angular.module('app.routes', [])
     .state('app.ahseb', {
 		url: '/ahseb',
 		templateUrl: 'templates/ahseb.html',
-		controller: 'a'
+		controller: 'AhsebCtrl'
     })
     .state('app.rizorsi', {
 		url: '/rizorsi',

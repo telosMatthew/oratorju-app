@@ -25,249 +25,167 @@ angular.module('app.controllers', ['ionic', 'app.services'])
     });
   })
 
-
-  .controller('HomeCtrl', ['$scope', '$http', 'Readings', 'Thoughts', 'Articles', '$timeout', '$cordovaFileTransfer', '$cordovaFile', '$ionicPlatform', '$cordovaNetwork', '$ionicLoading', function ($scope, $http, Readings, Thoughts, Articles, $timeout, $cordovaFileTransfer, $cordovaFile, $ionicPlatform, $cordovaNetwork, $ionicLoading) {
+  .controller('HomeCtrl', ['$scope', '$http', 'Readings', 'Thoughts', 'Articles', '$timeout', '$cordovaFileTransfer', '$cordovaFile', '$ionicPlatform', '$cordovaNetwork', function ($scope, $http, Readings, Thoughts, Articles, $timeout, $cordovaFileTransfer, $cordovaFile, $ionicPlatform, $cordovaNetwork) {
     //to be able to read the data retrieve, since a promise is used, we need
     //access the data through a callback function, hence the anonymous function in query()
 
-    //can be improved - maybe after a promise? tried to do this
-    // as an alternative to a dummy duration?
-    var initReady = false;
-    var readingsReady = false;
-    var thoughtsReady = false;
-    var articlesReady = false;
+    //device ready event is necessary to encapsulate ngCordova plugins
+    $ionicPlatform.ready(function() {
 
-    //download resources when user re-enters app
+      //flag which checks if device is online, if so, show possible
+      //embedded web views e.g. youtube, and do the necessary downloads
+      var isOnline = $cordovaNetwork.isOnline();
+      var url = 'http://oratorjumssp-001-site1.btempurl.com/'
+      var targetPath = cordova.file.dataDirectory;
+      var trustHosts = true;
+      var options = {};
 
-      //device ready event is necessary to encapsulate ngCordova plugins
-      $ionicPlatform.ready(function () {
+      //locks screen orientation only for home menu
+      screen.lockOrientation('portrait');
 
-        //flag which checks if device is online, if so, show possible
-        //embedded web views e.g. youtube, and do the necessary downloads
-        var isOnline = $cordovaNetwork.isOnline();
+      //first time creation of folder structure to store image downloads
+      $cordovaFile.checkDir(targetPath,"./Uploads").
+        then(function(success){
 
-        //locks screen orientation only for home menu
-        screen.lockOrientation('portrait');
+        },function(error){
+          $cordovaFile.createDir(cordova.file.dataDirectory, "./Uploads", true)
+            .then(function (success) {
+              //once directory is created, download the default images - since they must be referenced
+              //to a link in the device storage apparently
+              if (isOnline) {
+                var defaultImgArray = ['./Uploads/readingDefault.jpg', './Uploads/thoughtDefault.jpg', './Uploads/articleDefault.jpg']
 
-        if (window.localStorage.getItem('loaded') != 'true' && isOnline) {
-          window.localStorage.setItem('loaded','true');
+                for (var i = 0; i < defaultImgArray.length; i++) {
+                  $cordovaFileTransfer.download(
+                    url + defaultImgArray[i],
+                    targetPath + defaultImgArray[i],
+                    options,
+                    trustHosts)
+                    .then(function (result) {
+                      //console.log('result ' + result);
+                    }), function (err) {
+                    //console.log('err ' + err);
+                  }, function (progress) {
 
-        //setup loader whilst we download resources
-        $ionicLoading.show({
-          template: 'Daqt miegħek ...<br/><br/>' +
-          '<ion-spinner icon="ripple"></ion-spinner>',
-          animation: 'fade-in',
-          showBackdrop: true,
-          //maxWidth: 200,
-          showDelay: 00,
-          duration: 3000
+                  }
+                }
+              }
+            }, function (error) {
+
+            });
         });
 
+      $scope.readings = Readings.query(function () {
 
-        var url = 'http://oratorjumssp-001-site1.btempurl.com/'
-        var targetPath = cordova.file.dataDirectory;
-        var trustHosts = true;
-        var options = {};
+        for (var i = 0; i < $scope.readings.length; i++) {
 
-        //first time creation of folder structure to store image downloads
-        $cordovaFile.checkDir(targetPath, "./Uploads").
-          then(function (success) {
-            initReady = true;
-          }, function (error) {
-            $cordovaFile.createDir(cordova.file.dataDirectory, "./Uploads", true)
-              .then(function (success) {
+          var reading =
+          {
+            r_date: $scope.readings[i].r_date,
+            r_friendlyDate: $scope.readings[i].r_friendlyDate,
+            r_qari1: $scope.readings[i].r_qari1,
+            r_salm: $scope.readings[i].r_salm,
+            r_qari2: $scope.readings[i].r_qari2,
+            r_vangelu: $scope.readings[i].r_vangelu
+          }
 
-              }, function (error) {
+          var key = "r" + i;
+          window.localStorage.setItem(key, JSON.stringify(reading));
+        }
+      });
+      //$scope.orderProp = 'date';
 
-              });
-          });
+      $scope.thoughts = Thoughts.query(function () {
 
-          //once directory is created, download the default images - since they must be referenced
-          //to a link in the device storage apparently
+        for (var i = 0; i < $scope.thoughts.length; i++) {
+
+          //download the image for each thought from the server and save it locally on the device
           if (isOnline) {
-            var defaultImgArray = ['./Uploads/readingDefault.png', './Uploads/thoughtDefault.png', './Uploads/articleDefault.png']
-
-            for (var i = 0; i < defaultImgArray.length; i++) {
-              $cordovaFileTransfer.download(
-                url + defaultImgArray[i],
-                targetPath + defaultImgArray[i],
-                options,
-                trustHosts)
-                .then(function (result) {
-                  initReady = true;
-                  //console.log('result ' + result);
-                }), function (err) {
-                //console.log('err ' + err);
-              }, function (progress) {
-                  alert(progress.loaded + " " + progress.total);
-              }
-            }
-          }
-
-
-
-        $scope.readings = Readings.query(function () {
-
-          for (var i = 0; i < $scope.readings.length; i++) {
-
-            //download the image for each thought from the server and save it locally on the device
-            if (isOnline) {
-              $cordovaFileTransfer.download(
-                url + $scope.readings[i].r_image,
-                targetPath + $scope.readings[i].r_image,
-                options,
-                trustHosts)
-                .then(function (result) {
-                  //console.log('result ' + result);
-                }), function (err) {
-                //console.log('err ' + err);
-              }, function (progress) {
-
-              }
-            }
-
-            var reading =
-            {
-              r_date: $scope.readings[i].r_date,
-              r_friendlyDate: $scope.readings[i].r_friendlyDate,
-              r_qari1: $scope.readings[i].r_qari1,
-              r_salm: $scope.readings[i].r_salm,
-              r_qari2: $scope.readings[i].r_qari2,
-              r_vangelu: $scope.readings[i].r_vangelu,
-              r_image: ($scope.readings[i].r_image == "" ? targetPath + "./Uploads/readingDefault.png" : targetPath + $scope.readings[i].r_image), //if no image is uploaded, use default
-
-            }
-
-            var key = "r" + i;
-            window.localStorage.setItem(key, JSON.stringify(reading));
-          }
-
-          readingsReady = true;
-        });
-
-        $scope.thoughts = Thoughts.query(function () {
-
-          for (var i = 0; i < $scope.thoughts.length; i++) {
-
-            //download the image for each thought from the server and save it locally on the device
-            if (isOnline) {
-              $cordovaFileTransfer.download(
-                url + $scope.thoughts[i].t_image,
-                targetPath + $scope.thoughts[i].t_image,
-                options,
-                trustHosts)
-                .then(function (result) {
-                  //console.log('result ' + result);
-                }), function (err) {
-                //console.log('err ' + err);
-              }, function (progress) {
-                //console.log('progress ' + progress)
-                //$timeout(function () {
+            $cordovaFileTransfer.download(
+              url + $scope.thoughts[i].t_image,
+              targetPath + $scope.thoughts[i].t_image,
+              options,
+              trustHosts)
+              .then(function (result) {
+                //console.log('result ' + result);
+              }), function (err) {
+              //console.log('err ' + err);
+            }, function (progress) {
+              console.log('progress ' + progress)
+              $timeout(function () {
                 //$scope.downloadProgress = (progress.loaded / progress.total) * 100;
                 //console.log($scope.downloadProgress)
-                //})
-              }
+              })
             }
-            var thought =
-            {
-              t_date: $scope.thoughts[i].t_date,
-              t_friendlyDate: $scope.thoughts[i].t_friendlyDate,
-              t_content: $scope.thoughts[i].t_content,
-              t_image: ($scope.thoughts[i].t_image == "" ? targetPath + "./Uploads/thoughtDefault.png" : targetPath + $scope.thoughts[i].t_image) //if no image is uploaded, use default
-            }
-
-            var key = "t" + i;
-            window.localStorage.setItem(key, JSON.stringify(thought));
+          }
+          var thought =
+          {
+            t_date: $scope.thoughts[i].t_date,
+            t_friendlyDate: $scope.thoughts[i].t_friendlyDate,
+            t_content: $scope.thoughts[i].t_content,
+            t_image: ($scope.thoughts[i].t_image == "" ? targetPath + "./Uploads/thoughtDefault.jpg" : targetPath + $scope.thoughts[i].t_image) //if no image is uploaded, use default
           }
 
-          thoughtsReady = true;
-        });
-
-        $scope.articles = Articles.query(function () {
-
-          for (var i = 0; i < $scope.articles.length; i++) {
-
-            //download the image for each article from the server and save it locally on the device
-            if (isOnline) {
-              $cordovaFileTransfer.download(
-                url + $scope.articles[i].a_image,
-                targetPath + $scope.articles[i].a_image,
-                options,
-                trustHosts)
-                .then(function (result) {
-                  //console.log('result ' + result);
-                }), function (err) {
-                //console.log('err ' + err);
-              }, function (progress) {
-                //console.log('progress ' + progress)
-                $timeout(function () {
-                  //$scope.downloadProgress = (progress.loaded / progress.total) * 100;
-                  //console.log($scope.downloadProgress)
-                })
-              }
-
-              $cordovaFileTransfer.download(
-                url + $scope.articles[i].a_extraImages,
-                targetPath + $scope.articles[i].a_extraImages,
-                options,
-                trustHosts)
-                .then(function (result) {
-                  //console.log('result ' + result);
-                }), function (err) {
-                //console.log('err ' + err);
-              }, function (progress) {
-                //console.log('progress ' + progress)
-                $timeout(function () {
-                  //alert(progress.total);
-                  //$scope.downloadProgress = (progress.loaded / progress.total) * 100;
-                  //console.log($scope.downloadProgress)
-                })
-              }
-            }
-            var article =
-            {
-              a_date: $scope.articles[i].a_date,
-              a_friendlyDate: $scope.articles[i].a_friendlyDate,
-              a_content: $scope.articles[i].a_content.replace("()", "(" + targetPath + $scope.articles[i].a_extraImages + ")"),
-              a_image: ($scope.articles[i].a_image == "" ? targetPath + "./Uploads/articleDefault.png" : targetPath + $scope.articles[i].a_image), //if no image is uploaded, use default
-              a_extraImages: $scope.articles[i].a_extraImages
-            }
-
-
-            var key = "a" + i;
-            window.localStorage.setItem(key, JSON.stringify(article));
-          }
-
-          //seems that code is not entering here in the beginning!
-          articlesReady = true;
-        });
-
-
-        //ignored for now, since flags were remaining false always
-        var myInterval =
-          window.setInterval(function () {
-
-            if (initReady && readingsReady && thoughtsReady && articlesReady) {
-              $ionicLoading.hide();
-              clearInterval(myInterval);//stop repeating function once ready
-            }
-
-          }, 2000);
-
+          var key = "t" + i;
+          window.localStorage.setItem(key, JSON.stringify(thought));
         }
-      }).then(function () {
-
       });
 
+      $scope.articles = Articles.query(function () {
 
-    $ionicPlatform.on('resume', function(event) {
-      //when app continues - any logic goes here
+        for (var i = 0; i < $scope.articles.length; i++) {
+
+          //download the image for each article from the server and save it locally on the device
+          if(isOnline) {
+            $cordovaFileTransfer.download(
+              url + $scope.articles[i].a_image,
+              targetPath + $scope.articles[i].a_image,
+              options,
+              trustHosts)
+              .then(function (result) {
+                //console.log('result ' + result);
+              }), function (err) {
+              //console.log('err ' + err);
+            }, function (progress) {
+              //console.log('progress ' + progress)
+              $timeout(function () {
+                //$scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                //console.log($scope.downloadProgress)
+              })
+            }
+
+            $cordovaFileTransfer.download(
+              url + $scope.articles[i].a_extraImages,
+              targetPath + $scope.articles[i].a_extraImages,
+              options,
+              trustHosts)
+              .then(function (result) {
+                //console.log('result ' + result);
+              }), function (err) {
+              //console.log('err ' + err);
+            }, function (progress) {
+              //console.log('progress ' + progress)
+              $timeout(function () {
+                //$scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                //console.log($scope.downloadProgress)
+              })
+            }
+          }
+          var article =
+          {
+            a_date: $scope.articles[i].a_date,
+            a_friendlyDate: $scope.articles[i].a_friendlyDate,
+            a_content: $scope.articles[i].a_content.replace("()","(" + targetPath + $scope.articles[i].a_extraImages + ")"),
+            a_image: ($scope.articles[i].a_image == "" ? targetPath + "./Uploads/articleDefault.jpg" : targetPath + $scope.articles[i].a_image), //if no image is uploaded, use default
+            a_extraImages: $scope.articles[i].a_extraImages
+          }
+
+
+          var key = "a" + i;
+          window.localStorage.setItem(key, JSON.stringify(article));
+        }
+      });
     });
-
-    $ionicPlatform.on('pause', function(event) {
-      window.localStorage.removeItem('loaded');
-    });
-
   }])
 
   .controller('KelmaCtrl', function ($scope, $ionicSlideBoxDelegate) {
