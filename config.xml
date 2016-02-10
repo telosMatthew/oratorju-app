@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.mieghekfilmixja963639" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.telosworks.mixja" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Mixja</name>
   <description>
-        Mixja - brought to you by Telos.
+        Mixja - il-kumpann spiritwali tiegħek.
     </description>
-  <author email="matfar92@hotmail.com" href="http://telosworks.com/">
-      Telos - Matthew Farrugia &amp; David Muscat
+  <author email="info@telosworks.com" href="http://www.telosworks.com/">
+      Telos Works- Matthew Farrugia &amp; David Muscat
     </author>
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
-  <preference name="AutoHideSplashScreen" value="false"/>
-  <preference name="ShowSplashScreenSpinner" value="false"/>
-  <!--<preference name="FadeSplashScreen" value="true"/>
-  <preference name="FadeSplashScreenDuration" value="3000"/>-->
   <preference name="BackupWebStorage" value="none"/>
+  <!--<preference name="AutoHideSplashScreen" value="false"/>
+  <preference name="ShowSplashScreenSpinner" value="false"/>
+  <preference name="FadeSplashScreen" value="true"/>
+  <preference name="FadeSplashScreenDuration" value="3000"/>
   <preference name="SplashScreen" value="screen"/>
-  <preference name="SplashScreenDelay" value="3000"/>
+  <preference name="SplashScreenDelay" value="3000"/>-->
   <preference name="AndroidPersistentFileLocation" value="Compatibility"/>
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>

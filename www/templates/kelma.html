@@ -1,6 +1,6 @@
 <ion-view title="IL-KELMA" >
 	<!-- Content -->
-	<ion-content padding="false" style="position: absolute!important; top: 0px!important"; scrollbar-y="false">
+	<ion-content padding="false" style="position: absolute!important; top: 0px!important"; scrollbar-y="false" delegate-handle="scroller">
 		<ion-slide-box active-slide="activeSlide" on-slide-changed="slideHasChanged($index)" delegate-handle="slideBoxHandle" show-pager="false">
 		<ion-slide ng-repeat="reading in readings">
 		<!-- Date -->

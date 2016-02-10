@@ -158,11 +158,13 @@ div.divider {
 .content p img {
   max-width: 100%;
   margin: 0 auto;
+  margin-bottom: 10px;
   display: block; }
 
 .content iframe {
   max-width: 100% !important;
   margin: 0 auto;
+  margin-bottom: 1px;
   display: block; }
 
 /*!

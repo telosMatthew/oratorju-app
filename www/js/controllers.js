@@ -46,6 +46,10 @@ angular.module('app.controllers', ['ionic', 'app.services'])
         //embedded web views e.g. youtube, and do the necessary downloads
         var isOnline = $cordovaNetwork.isOnline();
 
+        if (navigator.connection.type == "unknown"){ //then assume it is 3g or 4g
+           isOnline = true;
+        }
+
         //locks screen orientation only for home menu
         screen.lockOrientation('portrait');
 
@@ -122,7 +126,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
                 }), function (err) {
                 //console.log('err ' + err);
               }, function (progress) {
-
+                    alert(progress);
               }
             }
 
@@ -270,7 +274,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
 
   }])
 
-  .controller('KelmaCtrl', function ($scope, $ionicSlideBoxDelegate) {
+  .controller('KelmaCtrl', function ($scope, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 
     screen.unlockOrientation();
 
@@ -373,6 +377,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
 
     //set contents according to the new day set
     $scope.slideHasChanged = function (index) {
+     $ionicSlideBoxDelegate.$getByHandle('slideBoxHandle').update(); //finally refresh contents on slidebox
       $scope.activeSlide = index;
       $scope.readingOfToday = (JSON.parse(window.localStorage["r" + index] || '{}')); //set the reading object of the current day
       $scope.hasTomorrow = 0; // to check if there is tomorrow's reading
@@ -401,6 +406,8 @@ angular.module('app.controllers', ['ionic', 'app.services'])
       }
       else
         $scope.hasYesterday = 0;
+
+      $ionicScrollDelegate.$getByHandle('scroller').scrollTop(true);
     }
 
     $scope.next = function() {
@@ -413,7 +420,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
 
   })
 
-  .controller('AhsebCtrl', function ($scope, $ionicSlideBoxDelegate) {
+  .controller('AhsebCtrl', function ($scope, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 
     screen.unlockOrientation();
 
@@ -486,6 +493,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
 
     //set contents according to the new day set
     $scope.slideHasChanged = function (index) {
+      $ionicSlideBoxDelegate.$getByHandle('slideBoxHandle').update(); //finally refresh contents on slidebox
       $scope.activeSlide = index;
       $scope.thoughtOfToday = (JSON.parse(window.localStorage["t" + index] || '{}')); //set the reading object of the current day
       $scope.hasTomorrow = 0; // to check if there is tomorrow's reading
@@ -507,6 +515,8 @@ angular.module('app.controllers', ['ionic', 'app.services'])
       }
       else
         $scope.hasYesterday = 0;
+
+      $ionicScrollDelegate.$getByHandle('scroller').scrollTop(true);
     }
 
     $scope.next = function() {
@@ -518,7 +528,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
     }
   })
 
-  .controller('RizorsiCtrl', function ($scope, $ionicSlideBoxDelegate) {
+  .controller('RizorsiCtrl', function ($scope, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 
     screen.unlockOrientation();
 
@@ -591,6 +601,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
 
     //set contents according to the new day set
     $scope.slideHasChanged = function (index) {
+      $ionicSlideBoxDelegate.$getByHandle('slideBoxHandle').update(); //finally refresh contents on slidebox
       $scope.activeSlide = index;
       $scope.articleOfToday = (JSON.parse(window.localStorage["a" + index] || '{}')); //set the reading object of the current day
       $scope.hasTomorrow = 0; // to check if there is tomorrow's reading
@@ -612,6 +623,8 @@ angular.module('app.controllers', ['ionic', 'app.services'])
       }
       else
         $scope.hasYesterday = 0;
+
+      $ionicScrollDelegate.$getByHandle('scroller').scrollTop(true);
     }
 
     $scope.next = function() {
