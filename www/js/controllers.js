@@ -103,7 +103,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
                 }), function (err) {
                 //console.log('err ' + err);
               }, function (progress) {
-                  alert(progress.loaded + " " + progress.total);
+                  //alert(progress.loaded + " " + progress.total);
               }
             }
           }
@@ -126,7 +126,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
                 }), function (err) {
                 //console.log('err ' + err);
               }, function (progress) {
-                    alert(progress);
+                   // alert(progress);
               }
             }
 
@@ -280,7 +280,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
 
     //get today's date and create a unique key which will be stored in localStorage
     var today = new Date();
-    var readingKey = "" + today.getFullYear() + (today.getMonth() + 1) + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
+    var readingKey = "" + today.getFullYear() + ((today.getMonth() + 1) < 10 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1) )+ (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
     var storageLength = window.localStorage.length;
     var maxReading = 0;//will display the latest reading for user if activeSlide remains zero
     var readingTodayFound = false; //indicates whether today's reading is found
@@ -303,6 +303,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
       if (Object.keys(reading).length != 0) // if object not empty
       {
         maxReading = i;
+       // alert(readingKey + " " + reading.r_date);
         if (readingKey == reading.r_date) {
           readingTodayFound = true;
           $scope.activeSlide = i;
@@ -426,7 +427,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
 
     //get today's date and create a unique key which will be stored in localStorage
     var today = new Date();
-    var thoughtKey = "" + today.getFullYear() + (today.getMonth() + 1) + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
+    var thoughtKey = "" + today.getFullYear() + ((today.getMonth() + 1) < 10 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1) ) + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
     var storageLength = window.localStorage.length;
     var maxThought = 0;//will display the latest thought for user if activeSlide remains zero
     var thoughtTodayFound = false; //indicates whether today's thought is found
@@ -534,7 +535,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
 
     //get today's date and create a unique key which will be stored in localStorage
     var today = new Date();
-    var articleKey = "" + today.getFullYear() + (today.getMonth() + 1) + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
+    var articleKey = "" + today.getFullYear() + ((today.getMonth() + 1) < 10 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1) ) + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
     var storageLength = window.localStorage.length;
     var maxArticle = 0;//will display the latest article for user if activeSlide remains zero
     var articleTodayFound = false; //indicates whether today's article is found
