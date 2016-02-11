@@ -1,7 +1,7 @@
 {
-  "name": "mieghek-fil-mixja",
-  "version": "1.1.1",
-  "description": "Mieghek Fil-Mixja: An Ionic project",
+  "name": "Mixja",
+  "version": "1.0.0",
+  "description": "Mixja: Kumpann għall-mixja spiritwali tiegħek.",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",

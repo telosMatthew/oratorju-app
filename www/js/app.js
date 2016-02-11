@@ -1,7 +1,14 @@
-angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services', 'app.directives'])
+angular.module('app',['ionic','app.controllers', 'app.routes', 'app.directives','hc.marked','ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaSplashscreen) {
+
+
   $ionicPlatform.ready(function() {
+
+    //setTimeout(function() {
+    //  $cordovaSplashscreen.hide();
+    //});
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -11,5 +18,16 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
   });
 })
+
+.config(function($ionicConfigProvider) {
+	// Reset the controller each time it is accessed
+    //$ionicConfigProvider.views.maxCache(0);
+
+	// Center align title on android
+	$ionicConfigProvider.navBar.alignTitle('center');
+});
+
+

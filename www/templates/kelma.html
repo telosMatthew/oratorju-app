@@ -1,30 +1,38 @@
-<ion-view title="Il-Kelma">
-	<!-- Sub header -->
-	<ion-header-bar class="bar bar-subheader">
-		<i class="icon ion-chevron-left" style="float: left"></i>
-		<h2 class="title">Illum, 8 ta' Novembru</h2>
-		<i class="icon ion-chevron-right" style="float: right"></i>
-	</ion-header-bar>
+<ion-view title="IL-KELMA" >
 	<!-- Content -->
-	<ion-content padding="true">
-		<div class="spacer"></div>	
-        <img src="img/bible.jpg" width="100%" height="auto">
-		<div class="spacer"></div>
-		<!-- Button bar to choose date -->	
-		<div class="button-bar">
-		  <a class="button">I Qari</a>
-		  <a class="button active">II Qari</a>
-		  <a class="button">Salm</a>
-		  <a class="button">Vangelu</a>
+	<ion-content padding="false" style="position: absolute!important; top: 0px!important"; scrollbar-y="false" delegate-handle="scroller">
+		<ion-slide-box active-slide="activeSlide" on-slide-changed="slideHasChanged($index)" delegate-handle="slideBoxHandle" show-pager="false">
+		<ion-slide ng-repeat="reading in readings">
+		<!-- Date -->
+		<!-- Image -->
+		<div style="position: relative">
+      <img src="{{reading.r_image}}" style="position: relative; width: 100%; height: auto; margin-bottom: -7px; "/>
+			<div class="overlay">
+        <div class="icon ion-ios-arrow-back previous" style="float:left; font-size:1.4em; color: #FFFFE0!important" ng-click="previous()" ng-show="hasYesterday">
+
+        </div>
+
+        <div class="icon ion-ios-arrow-forward next" style="float:right; font-size:1.4em; color: #FFFFE0!important" ng-click="next()" ng-show="hasTomorrow">
+
+        </div>
+        <h4 class="overlay-title" style="margin: 0 auto;">
+          {{reading.r_newfriendlyDate}}
+        </h4>
+
+      </div>
 		</div>
-        <h3>Izaija 2, 1-5</h3>
-		<div class="divider"></div>
-		<div class="spacer"></div>
-		<div class="spacer"></div>
-        <div>
-            <p>Il-kelma li giet f'dehra lil Isaija bin Amos, dwar Guda u Gerusalemm.</p>
-            <p>Ghad jigri fl-ahhar jiem li l-gholja tad-dar tal-Mulej toghla 'l fuq mill-qcacet tal-muntanji, u tintrefa 'l fuq mill-gholjiet , lejha ghad jigru l-gnus kollha.</p>
-            <p>Kotra ta' popli ghad jigu u jghidu</p>
-        </div>		
-    </ion-content>
+        <!-- Button bar to choose date -->
+        <div class="button-bar">
+          <a class="button" ng-click="touch('0')" ng-class="{'active': isSelected == '0'}">I QARI</a>
+          <a class="button" ng-click="touch('1')" ng-class="{'active': isSelected == '1'}">SALM</a>
+          <a class="button" ng-click="touch('2')" ng-show="showReading" ng-class="{'active': isSelected == '2'}">II
+            QARI</a>
+          <a class="button" ng-click="touch('3')" ng-class="{'active': isSelected == '3'}">VANĠELU</a>
+        </div>
+		<!-- Reading -->
+        <div marked="activeReading" class="padding"></div>
+      </ion-slide>
+    </ion-slide-box>
+
+  </ion-content>
 </ion-view>
