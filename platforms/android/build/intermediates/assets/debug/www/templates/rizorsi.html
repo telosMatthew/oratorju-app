@@ -1,0 +1,29 @@
+<ion-view title="RIŻORSI">
+  <!-- Sub header -->
+  <ion-content padding="false" scrollbar-y="false">
+    <ion-slide-box active-slide="activeSlide" on-slide-changed="slideHasChanged($index)" delegate-handle="slideBoxHandle" show-pager="false">
+      <ion-slide ng-repeat="article in articles">
+        <!-- Date -->
+        <!-- Image -->
+        <div style="position: relative">
+          <img src="{{article.a_image}}" style="position: relative; width: 100%; height: auto; margin-bottom: -7px; "/>
+          <div class="overlay">
+            <div class="icon ion-ios-arrow-back previous" style="float:left; font-size:1.4em; color: #FFFFE0!important" ng-click="previous()" ng-show="hasYesterday">
+
+            </div>
+
+            <div class="icon ion-ios-arrow-forward next" style="float:right; font-size:1.4em; color: #FFFFE0!important" ng-click="next()" ng-show="hasTomorrow">
+
+            </div>
+            <h4 class="overlay-title" style="margin: 0 auto;">
+              {{article.a_newfriendlyDate}}
+            </h4>
+          </div>
+        </div>
+
+        <div marked="activeArticle" class="content padding"></div>
+      </ion-slide>
+    </ion-slide-box>
+
+  </ion-content>
+</ion-view>

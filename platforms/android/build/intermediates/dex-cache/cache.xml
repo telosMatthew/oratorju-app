@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Matthew\Desktop\Telos\Mieghek Fil-Mixja\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="0ab2cb9992fbd40f65bde799d5a891dfb1f2bfab">
+        <dex dex="C:\Users\Matthew\Desktop\Telos\Mieghek Fil-Mixja\platforms\android\build\intermediates\pre-dexed\debug\classes-a32b835600c55e1cfbc93ec31144b60ff0d9c7a6.jar" />
+    </item>
+    <item
+        jar="C:\Users\Matthew\Desktop\Telos\Mieghek Fil-Mixja\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\release\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="9326fff7c164b9633bd902e4f3f26a0133d313ff">
+        <dex dex="C:\Users\Matthew\Desktop\Telos\Mieghek Fil-Mixja\platforms\android\build\intermediates\pre-dexed\release\classes-b443bf5c4b5fbc21107fd865a2cb13b3967985eb.jar" />
+    </item>
+
+</items>

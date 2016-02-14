@@ -1,0 +1,2 @@
+C:\Users\Matthew\Desktop\Telos\Mieghek Fil-Mixja\platforms\android\build\intermediates\classes\release
+C:\Users\Matthew\Desktop\Telos\Mieghek Fil-Mixja\platforms\android\build\intermediates\pre-dexed\release\classes-b443bf5c4b5fbc21107fd865a2cb13b3967985eb.jar

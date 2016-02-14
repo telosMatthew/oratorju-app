@@ -1,0 +1,2 @@
+C:\Users\Matthew\Desktop\Telos\Mieghek Fil-Mixja\platforms\android\build\intermediates\classes\debug
+C:\Users\Matthew\Desktop\Telos\Mieghek Fil-Mixja\platforms\android\build\intermediates\pre-dexed\debug\classes-a32b835600c55e1cfbc93ec31144b60ff0d9c7a6.jar
