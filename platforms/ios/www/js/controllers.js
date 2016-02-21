@@ -45,7 +45,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
         //flag which checks if device is online, if so, show possible
         //embedded web views e.g. youtube, and do the necessary downloads
         var isOnline = $cordovaNetwork.isOnline();
-
+                          
         if (navigator.connection.type == "unknown"){ //then assume it is 3g or 4g
            isOnline = true;
         }
@@ -103,7 +103,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
                 }), function (err) {
                 //console.log('err ' + err);
               }, function (progress) {
-                  alert(progress.loaded + " " + progress.total);
+                  //alert(progress.loaded + " " + progress.total);
               }
             }
           }
@@ -126,7 +126,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
                 }), function (err) {
                 //console.log('err ' + err);
               }, function (progress) {
-                    alert(progress);
+                   // alert(progress);
               }
             }
 
@@ -277,10 +277,10 @@ angular.module('app.controllers', ['ionic', 'app.services'])
   .controller('KelmaCtrl', function ($scope, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 
     screen.unlockOrientation();
-
+              
     //get today's date and create a unique key which will be stored in localStorage
     var today = new Date();
-    var readingKey = "" + today.getFullYear() + (today.getMonth() + 1) + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
+    var readingKey = "" + today.getFullYear() + ((today.getMonth() + 1) < 10 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1) )+ (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
     var storageLength = window.localStorage.length;
     var maxReading = 0;//will display the latest reading for user if activeSlide remains zero
     var readingTodayFound = false; //indicates whether today's reading is found
@@ -290,7 +290,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
     $scope.hasYesterday = 0; // to check if there is yesterday's reading
     $scope.activeSlide = 0;
     $scope.activeReading = ""; //text currently shown to user
-
+           
 
     //find today's reading and set at as the acive slide
     for (var i = 0; i < storageLength; i++) {
@@ -303,7 +303,10 @@ angular.module('app.controllers', ['ionic', 'app.services'])
       if (Object.keys(reading).length != 0) // if object not empty
       {
         maxReading = i;
+       // alert(readingKey + " " + reading.r_date);
+              
         if (readingKey == reading.r_date) {
+              
           readingTodayFound = true;
           $scope.activeSlide = i;
           reading.r_newfriendlyDate = "Illum, " + reading.r_friendlyDate;
@@ -426,7 +429,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
 
     //get today's date and create a unique key which will be stored in localStorage
     var today = new Date();
-    var thoughtKey = "" + today.getFullYear() + (today.getMonth() + 1) + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
+    var thoughtKey = "" + today.getFullYear() + ((today.getMonth() + 1) < 10 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1) ) + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
     var storageLength = window.localStorage.length;
     var maxThought = 0;//will display the latest thought for user if activeSlide remains zero
     var thoughtTodayFound = false; //indicates whether today's thought is found
@@ -534,7 +537,7 @@ angular.module('app.controllers', ['ionic', 'app.services'])
 
     //get today's date and create a unique key which will be stored in localStorage
     var today = new Date();
-    var articleKey = "" + today.getFullYear() + (today.getMonth() + 1) + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
+    var articleKey = "" + today.getFullYear() + ((today.getMonth() + 1) < 10 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1) ) + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate());
     var storageLength = window.localStorage.length;
     var maxArticle = 0;//will display the latest article for user if activeSlide remains zero
     var articleTodayFound = false; //indicates whether today's article is found
